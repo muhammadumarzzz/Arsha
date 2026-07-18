@@ -14,7 +14,7 @@ class Portfolio(models.Model):
     url = models.URLField()
     malumot = models.TextField()
     tur = models.ForeignKey(Type, on_delete=models.CASCADE)
-    rasm1 = models.ImageField(upload_to='media')
+    rasm1 = models.ImageField(upload_to='')
     rasm2 = models.ImageField(upload_to='media', null=True, blank=True)
     rasm3 = models.ImageField(upload_to='media', null=True, blank=True)
 
