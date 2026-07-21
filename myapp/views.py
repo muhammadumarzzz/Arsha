@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from myapp.models import Portfolio, Type
+from myapp.models import Portfolio, Type, Service, TeamMember
 # Create your views here.
 
 def index(request):
@@ -18,3 +18,14 @@ def portfolio_details(request):
 def single_portfolio(malumot, id):
     work = Portfolio.objects.get(id=id)
     return render(malumot, 'myapp/portfolio-details.html', {'work':work})
+
+def home(request):
+    portfolios = Portfolio.objects.all()
+    services = Service.objects.filter(is_active=True)
+    team_members = TeamMember.objects.filter(is_active=True)
+    context = {
+        "portfolios": portfolios,
+        "services": services,
+        "team_members": team_members,
+    }
+    return render(request, "myapp/index.html", context)

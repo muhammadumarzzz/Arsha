@@ -205,47 +205,28 @@
     </section><!-- End Skills Section -->
 
     <!-- ======= Services Section ======= -->
-    <section id="services" class="services section-bg">
-      <div class="container" data-aos="fade-up">
+    <section id="services" class="services">
+      <div class="container">
 
         <div class="section-title">
-          <h2>Services</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <h2>SERVICES</h2>
+          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem...</p>
         </div>
 
         <div class="row">
-          <div class="col-xl-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4><a href="">Lorem Ipsum</a></h4>
-              <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+          {% for service in services %}
+            <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-4">
+              <div class="icon-box">
+                <div class="icon"><i class="{{ service.icon_class|default:'bi bi-card-checklist' }}"></i></div>
+                <h4 class="title"><a href="">{{ service.title }}</a></h4>
+                <p class="description">{{ service.description }}</p>
+              </div>
             </div>
-          </div>
-
-          <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-file"></i></div>
-              <h4><a href="">Sed ut perspici</a></h4>
-              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
+          {% empty %}
+            <div class="col-12 text-center">
+              <p>Hozircha hech qanday faol xizmat ko'rsatilmagan.</p>
             </div>
-          </div>
-
-          <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="300">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-tachometer"></i></div>
-              <h4><a href="">Magni Dolores</a></h4>
-              <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
-            </div>
-          </div>
-
-          <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="400">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-layer"></i></div>
-              <h4><a href="">Nemo Enim</a></h4>
-              <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-            </div>
-          </div>
-
+          {% endfor %}
         </div>
 
       </div>
@@ -288,7 +269,7 @@
         </ul>
 
         <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
-          {% for i in works %}
+          {% for i in portfolios %}
               <div class="col-lg-4 col-md-6 portfolio-item filter-app">
                 <div class="portfolio-img"><img src="{{ i.rasm1.url }}" class="img-fluid" alt="{{ i.nomi }}"></div>
                 <div class="portfolio-info">
@@ -306,89 +287,59 @@
       </div>
     </section><!-- End Portfolio Section -->
 
-    <!-- ======= Team Section ======= -->
-    <section id="team" class="team section-bg">
-      <div class="container" data-aos="fade-up">
+<!-- ======= Team Section ======= -->
+<section id="team" class="team section-bg">
+  <div class="container" data-aos="fade-up">
 
-        <div class="section-title">
-          <h2>Team</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+    <div class="section-title">
+      <h2>Team</h2>
+      <p>Bizning professional jamoa a'zolarimiz bilan tanishing</p>
+    </div>
+
+    <div class="row">
+      {% for member in team_members %}
+        <div class="col-lg-6 mb-4" data-aos="zoom-in" data-aos-delay="100">
+          <div class="member d-flex align-items-start">
+            <div class="pic">
+              {% if member.image %}
+                <img src="{{ member.image.url }}" class="img-fluid" alt="{{ member.full_name }}">
+              {% else %}
+                <img src="/static/assets/img/team/team-1.jpg" class="img-fluid" alt="default">
+              {% endif %}
+            </div>
+            <div class="member-info">
+              <h4>{{ member.full_name }}</h4>
+              <span>{{ member.position }}</span>
+              <p>{{ member.bio }}</p>
+              
+              <!-- Ijtimoiy tarmoqlar (faqat havola borlari ko'rinadi) -->
+              <div class="social">
+                {% if member.twitter_url %}
+                  <a href="{{ member.twitter_url }}" target="_blank"><i class="ri-twitter-fill"></i></a>
+                {% endif %}
+                {% if member.facebook_url %}
+                  <a href="{{ member.facebook_url }}" target="_blank"><i class="ri-facebook-fill"></i></a>
+                {% endif %}
+                {% if member.instagram_url %}
+                  <a href="{{ member.instagram_url }}" target="_blank"><i class="ri-instagram-fill"></i></a>
+                {% endif %}
+                {% if member.linkedin_url %}
+                  <a href="{{ member.linkedin_url }}" target="_blank"><i class="ri-linkedin-box-fill"></i></a>
+                {% endif %}
+              </div>
+
+            </div>
+          </div>
         </div>
-
-        <div class="row">
-
-          <div class="col-lg-6">
-            <div class="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="100">
-              <div class="pic"><img src="{% static 'assets/img/team/team-1.jpg' %}" class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>Walter White</h4>
-                <span>Chief Executive Officer</span>
-                <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p>
-                <div class="social">
-                  <a href=""><i class="ri-twitter-fill"></i></a>
-                  <a href=""><i class="ri-facebook-fill"></i></a>
-                  <a href=""><i class="ri-instagram-fill"></i></a>
-                  <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-6 mt-4 mt-lg-0">
-            <div class="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="200">
-              <div class="pic"><img src="{% static 'assets/img/team/team-2.jpg' %}" class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>Sarah Jhonson</h4>
-                <span>Product Manager</span>
-                <p>Aut maiores voluptates amet et quis praesentium qui senda para</p>
-                <div class="social">
-                  <a href=""><i class="ri-twitter-fill"></i></a>
-                  <a href=""><i class="ri-facebook-fill"></i></a>
-                  <a href=""><i class="ri-instagram-fill"></i></a>
-                  <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-6 mt-4">
-            <div class="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="300">
-              <div class="pic"><img src="{% static 'assets/img/team/team-3.jpg' %}" class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>William Anderson</h4>
-                <span>CTO</span>
-                <p>Quisquam facilis cum velit laborum corrupti fuga rerum quia</p>
-                <div class="social">
-                  <a href=""><i class="ri-twitter-fill"></i></a>
-                  <a href=""><i class="ri-facebook-fill"></i></a>
-                  <a href=""><i class="ri-instagram-fill"></i></a>
-                  <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-6 mt-4">
-            <div class="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="400">
-              <div class="pic"><img src="{% static 'assets/img/team/team-4.jpg' %}" class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>Amanda Jepson</h4>
-                <span>Accountant</span>
-                <p>Dolorum tempora officiis odit laborum officiis et et accusamus</p>
-                <div class="social">
-                  <a href=""><i class="ri-twitter-fill"></i></a>
-                  <a href=""><i class="ri-facebook-fill"></i></a>
-                  <a href=""><i class="ri-instagram-fill"></i></a>
-                  <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
+      {% empty %}
+        <div class="col-12 text-center">
+          <p>Hozircha hech qanday jamoa a'zosi kiritilmagan.</p>
         </div>
+      {% endfor %}
+    </div>
 
-      </div>
-    </section><!-- End Team Section -->
+  </div>
+</section><!-- End Team Section -->
 
     <!-- ======= Pricing Section ======= -->
     <section id="pricing" class="pricing">
