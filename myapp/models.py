@@ -70,3 +70,10 @@ class TeamMember(models.Model):
 
     def __str__(self):
         return f"{self.full_name} - {self.position}"
+
+class Murojaat(models.Model):
+    name = models.CharField(max_length=30)
+    mail = models.EmailField(max_length=40)
+    title = models.CharField(max_length=50)
+    text = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)

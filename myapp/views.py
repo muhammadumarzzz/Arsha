@@ -1,11 +1,27 @@
-from django.shortcuts import render
-from myapp.models import Portfolio, Type, Service, TeamMember
+from django.shortcuts import render, redirect
+from myapp.models import Portfolio, Type, Service, TeamMember, Murojaat
+from datetime import datetime
 # Create your views here.
 
 def index(request):
+    if request.method == "POST":
+        ismi = request.POST.get('name')
+        mail = request.POST.get('email')
+        mavzu = request.POST.get('subject')
+        xabar = request.POST.get('message')
+
+        Murojaat.objects.create(
+            name=ismi,
+            mail=mail,
+            title=mavzu,
+            text=xabar
+        )
+        
+        return redirect('home')
+
     works = Portfolio.objects.all()
     turlar = Type.objects.all()
-    return render(request, 'myapp/index.html', {'works':works, 'types':turlar})
+    return render(request, 'myapp/index.html', {'works': works, 'types': turlar})
 
 def filter_index(malumot, id):
     works = Portfolio.objects.filter(tur_id=id)
