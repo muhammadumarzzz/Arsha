@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from myapp.models import Portfolio, Type, Service, TeamMember, Murojaat
-from datetime import datetime
 # Create your views here.
 
 def index(request):
