@@ -94,7 +94,8 @@ class TeamMemberAdmin(admin.ModelAdmin):
         }),
     )
 
-@admin.register(Murojaat)
-class MurojaatAdmin(admin.ModelAdmin):
-    list_display = ('name', 'mail', 'title', 'date')
-    ordering = ('-date',)
+
+class AdminMurojaat(admin.ModelAdmin):
+    list_display = ['id', 'name', 'mail', 'title', 'date']
+
+admin.site.register(Murojaat, AdminMurojaat)
