@@ -1,5 +1,6 @@
 from django.contrib import admin
 from myapp.models import *
+
 # Register your models here.
 
 class AdminPortfolio(admin.ModelAdmin):
@@ -12,8 +13,6 @@ class AdminType(admin.ModelAdmin):
 
 admin.site.register(Type, AdminType)
 
-from django.contrib import admin
-from .models import Service
 
 @admin.register(Service)
 class ServiceAdmin(admin.ModelAdmin):

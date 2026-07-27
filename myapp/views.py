@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from myapp.models import Portfolio, Type, Service, TeamMember, Murojaat
 # Create your views here.
 
-def index(request):
+def home(request):
     if request.method == "POST":
         ismi = request.POST.get('name')
         mail = request.POST.get('email')
@@ -14,13 +14,21 @@ def index(request):
             mail=mail,
             title=mavzu,
             text=xabar
-        )
-        
-        return redirect('home')
+        ).save()
 
     works = Portfolio.objects.all()
     turlar = Type.objects.all()
-    return render(request, 'myapp/index.html', {'works': works, 'types': turlar})
+    portfolios = Portfolio.objects.all()
+    services = Service.objects.filter(is_active=True)
+    team_members = TeamMember.objects.filter(is_active=True)
+    context = {
+            "portfolios": portfolios,
+            "services": services,
+            "team_members": team_members,
+            'works': works, 
+            'types': turlar,
+        }
+    return render(request, 'myapp/index.html', context)
 
 def filter_index(malumot, id):
     works = Portfolio.objects.filter(tur_id=id)
@@ -33,14 +41,3 @@ def portfolio_details(request):
 def single_portfolio(malumot, id):
     work = Portfolio.objects.get(id=id)
     return render(malumot, 'myapp/portfolio-details.html', {'work':work})
-
-def home(request):
-    portfolios = Portfolio.objects.all()
-    services = Service.objects.filter(is_active=True)
-    team_members = TeamMember.objects.filter(is_active=True)
-    context = {
-        "portfolios": portfolios,
-        "services": services,
-        "team_members": team_members,
-    }
-    return render(request, "myapp/index.html", context)
