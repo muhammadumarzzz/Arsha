@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect
-from myapp.models import Portfolio, Type, Service, TeamMember, Murojaat
+from django.shortcuts import render
+from myapp.models import Portfolio, Type, Service, TeamMember, Murojaat, Subscribe
 # Create your views here.
 
 def home(request):
@@ -41,3 +41,11 @@ def portfolio_details(request):
 def single_portfolio(malumot, id):
     work = Portfolio.objects.get(id=id)
     return render(malumot, 'myapp/portfolio-details.html', {'work':work})
+
+def subscribe(malumot):
+    if malumot.method == "POST":
+        email = malumot.POST.get("email")
+
+        Subscribe.objects.create(email=email).save()
+
+    return render(malumot, 'myapp/index.html')

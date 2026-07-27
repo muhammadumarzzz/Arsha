@@ -98,3 +98,8 @@ class AdminMurojaat(admin.ModelAdmin):
     list_display = ['id', 'name', 'mail', 'title', 'date']
 
 admin.site.register(Murojaat, AdminMurojaat)
+
+class AdminSubscribe(admin.ModelAdmin):
+    list_display = ['id', 'email']
+
+admin.site.register(Subscribe, AdminSubscribe)

@@ -85,3 +85,9 @@ class Murojaat(models.Model):
 
     def __str__(self):
         return f"{self.name}"
+
+class Subscribe(models.Model):
+    email = models.EmailField(max_length=50)
+
+    def __str__(self):
+        return self.email
