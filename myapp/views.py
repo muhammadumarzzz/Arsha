@@ -1,11 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from myapp.models import Portfolio, Type, Service, TeamMember, Murojaat, Subscribe
 from django.db.models import Q
 # Create your views here.
-
-from django.shortcuts import render
-from django.db.models import Q
-from .models import Portfolio, Type, Service, TeamMember, Murojaat
 
 def home(request):
     if request.method == "POST" and 'subject' in request.POST:
